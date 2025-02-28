@@ -35,26 +35,26 @@ autoload -U colors && colors
 : "${ZSH_THEME_GIT_PROMPT_PREFIX="["}"
 : "${ZSH_THEME_GIT_PROMPT_SUFFIX="] "}"
 : "${ZSH_THEME_GIT_PROMPT_SEPARATOR="|"}"
-: "${ZSH_THEME_GIT_PROMPT_DETACHED="%{$fg_bold[cyan]%}:"}"
-: "${ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[magenta]%}"}"
-: "${ZSH_THEME_GIT_PROMPT_UPSTREAM_SYMBOL="%{$fg_bold[yellow]%}⟳ "}"
+: "${ZSH_THEME_GIT_PROMPT_DETACHED="%F{cyan}:"}"
+: "${ZSH_THEME_GIT_PROMPT_BRANCH="%F{magenta}"}"
+: "${ZSH_THEME_GIT_PROMPT_UPSTREAM_SYMBOL="%F{yellow}⟳ "}"
 : "${ZSH_THEME_GIT_PROMPT_UPSTREAM_NO_TRACKING=""}"
-: "${ZSH_THEME_GIT_PROMPT_UPSTREAM_PREFIX="%{$fg[red]%}(%{$fg[yellow]%}"}"
-: "${ZSH_THEME_GIT_PROMPT_UPSTREAM_SUFFIX="%{$fg[red]%})"}"
+: "${ZSH_THEME_GIT_PROMPT_UPSTREAM_PREFIX="%F{red}(%F{yellow}"}"
+: "${ZSH_THEME_GIT_PROMPT_UPSTREAM_SUFFIX="%F{red})"}"
 : "${ZSH_THEME_GIT_PROMPT_BEHIND="↓"}"
 : "${ZSH_THEME_GIT_PROMPT_AHEAD="↑"}"
-: "${ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[red]%}✖"}"
-: "${ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}●"}"
-: "${ZSH_THEME_GIT_PROMPT_UNSTAGED="%{$fg[red]%}✚"}"
+: "${ZSH_THEME_GIT_PROMPT_UNMERGED="%F{red}✖"}"
+: "${ZSH_THEME_GIT_PROMPT_STAGED="%F{green}●"}"
+: "${ZSH_THEME_GIT_PROMPT_UNSTAGED="%F{green}✚"}"
 : "${ZSH_THEME_GIT_PROMPT_UNTRACKED="…"}"
-: "${ZSH_THEME_GIT_PROMPT_STASHED="%{$fg[blue]%}⚑"}"
-: "${ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}✔"}"
+: "${ZSH_THEME_GIT_PROMPT_STASHED="%F{blue}⚑"}"
+: "${ZSH_THEME_GIT_PROMPT_CLEAN="%F{green}✔"}"
 : "${ZSH_THEME_GIT_PROMPT_SECONDARY_PREFIX=""}"
 : "${ZSH_THEME_GIT_PROMPT_SECONDARY_SUFFIX=""}"
 : "${ZSH_THEME_GIT_PROMPT_TAGS_SEPARATOR=", "}"
 : "${ZSH_THEME_GIT_PROMPT_TAGS_PREFIX="🏷 "}"
 : "${ZSH_THEME_GIT_PROMPT_TAGS_SUFFIX=""}"
-: "${ZSH_THEME_GIT_PROMPT_TAG="%{$fg_bold[magenta]%}"}"
+: "${ZSH_THEME_GIT_PROMPT_TAG="%F{magenta}"}"
 
 # Disable promptinit if it is loaded
 (( $+functions[promptinit] )) && {promptinit; prompt off}
@@ -64,8 +64,9 @@ setopt PROMPT_SUBST
 
 # Override PROMPT if it does not use the gitprompt function
 [[ "$PROMPT" != *gitprompt* && "$RPROMPT" != *gitprompt* ]] \
-    && PROMPT='%B%40<..<%~ %b$(gitprompt)' \
-    && PROMPT+='%(?.%(!.%F{white}❯%F{yellow}❯%F{red}.%F{blue}❯%F{cyan}❯%F{green})❯.%F{red}❯❯❯)%f '
+    && PROMPT='%F{green}%n%f@%F{blue}%50<..<%~%f $(gitprompt)%# '
+    # && PROMPT='%50<..<%~ $(gitprompt)' \
+    # && PROMPT+='%(?.%(!.%F{white}❯%F{yellow}❯%F{red}.%F{blue}❯%F{cyan}❯%F{green})❯.%F{red}❯❯❯)%f '
 
 # Find an awk implementation
 # Prefer nawk over mawk and mawk over awk
